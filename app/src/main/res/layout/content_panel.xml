@@ -18,4 +18,9 @@
         android:textSize="20sp"
         android:gravity="center"
         android:text="Sistema de Gestión Académica UNT" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/unt_logo"/>
 </RelativeLayout>
