@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.youtube.sorcjc.sga_mobile.PanelActivity"
+    tools:context="com.youtube.sorcjc.sga_mobile.ui.PanelActivity"
     tools:showIn="@layout/app_bar_panel">
 
     <TextView
@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:gravity="center"
-        android:text="Sistema de Gestión Académica UNT" />
+        android:text="@string/management_system" />
 
     <ImageView
         android:layout_width="wrap_content"

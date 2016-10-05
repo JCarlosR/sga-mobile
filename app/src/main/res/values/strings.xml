@@ -4,5 +4,35 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="university_name" translatable="false">Universidad Nacional de Trujillo</string>
+
+    <!-- LoginActivity -->
+    <string name="username">Código de alumno</string>
+    <string name="password">Contraseña</string>
+    <string name="login">Ingresar</string>
+
+    <!-- PanelActivity -->
+    <string name="management_system">Sistema de Gestión Académica UNT</string>
     <string name="action_settings">Configuración</string>
+
+    <!-- DataFragment -->
+    <string name="data_fragment_title">Datos de alumno</string>
+    <string name="data_last_name">Apellidos</string>
+    <string name="data_first_name">Nombres</string>
+    <string name="data_document">DNI</string>
+    <string name="data_address">Dirección</string>
+    <string name="data_phone">Teléfono</string>
+    <string name="data_cellphone">Celular</string>
+    <string name="data_email">E-mail</string>
+    <string name="save_changes">Guardar cambios</string>
+
+    <!-- CoursesFragment -->
+    <string name="courses_fragment_title">Cursos de la matrícula actual</string>
+
+    <!-- SyllabusFragment -->
+    <string name="syllabus_fragment_title">Sílabos de cursos actuales</string>
+
+    <!-- NotificationsFragment -->
+    <string name="notifications_fragment_title">Últimas notificaciones</string>
+
 </resources>

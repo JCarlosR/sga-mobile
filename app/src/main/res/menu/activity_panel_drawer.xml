@@ -3,19 +3,19 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_user_data"
             android:icon="@drawable/ic_account_circle_black_24dp"
             android:title="Sus datos" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_courses"
             android:icon="@drawable/ic_book_black_24dp"
             android:title="Cursos" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_syllabus"
             android:icon="@drawable/ic_cloud_download_black_24dp"
             android:title="Sílabos" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_notifications"
             android:icon="@drawable/ic_announcement_black_24dp"
             android:title="Anuncios" />
     </group>
@@ -27,7 +27,7 @@
                 android:icon="@drawable/ic_menu_share"
                 android:title="Compartir" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_report"
                 android:icon="@drawable/ic_bug_report_black_24dp"
                 android:title="Reportar error" />
         </menu>
