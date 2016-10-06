@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.youtube.sorcjc.sga_mobile.R;
 import com.youtube.sorcjc.sga_mobile.domain.Course;
@@ -35,6 +36,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.MessageVie
         holder.setName(course.getName());
         holder.setTeacher(course.getTeacher());
         holder.setDetails(course.getCredits(), course.getType());
+        holder.setCourseClickEvent(course.getId());
     }
 
     @Override
@@ -50,29 +52,40 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.MessageVie
         notifyDataSetChanged();
     }
 
-    public class MessageViewHolder extends RecyclerView.ViewHolder {
+    class MessageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView tvName;
         private TextView tvTeacher;
         private TextView tvDetails;
+        private View itemCourse;
 
-        public MessageViewHolder(View itemView) {
+        MessageViewHolder(View itemView) {
             super(itemView);
 
             tvName = (TextView) itemView.findViewById(R.id.tvName);
             tvTeacher = (TextView) itemView.findViewById(R.id.tvTeacher);
             tvDetails = (TextView) itemView.findViewById(R.id.tvDetails);
+            itemCourse = itemView.findViewById(R.id.itemCourse);
         }
 
-        public void setName(String name) {
+        private void setName(String name) {
             tvName.setText(name);
         }
 
-        public void setTeacher(String teacher) {
+        private void setTeacher(String teacher) {
             tvTeacher.setText(teacher);
         }
 
-        public void setDetails(int credits, String type) {
+        private void setDetails(int credits, String type) {
             tvDetails.setText(credits + " créditos - " + type);
+        }
+
+        private void setCourseClickEvent(int courseId) {
+            itemCourse.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(context, "Abrir CourseActivity !", Toast.LENGTH_SHORT).show();
         }
 
 //        public void setImage(String urlImage) {

@@ -16,13 +16,13 @@
             android:layout_height="match_parent"
             android:textSize="20sp"
             android:gravity="center"
+            android:layout_margin="8dp"
             android:text="@string/courses_fragment_title" />
 
         <View
-            android:id="@+id/separator"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#e5e5e5" />
+            android:background="@color/colorAccent" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
