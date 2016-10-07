@@ -1,14 +1,17 @@
 package com.youtube.sorcjc.sga_mobile.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.youtube.sorcjc.sga_mobile.R;
 import com.youtube.sorcjc.sga_mobile.domain.Course;
+import com.youtube.sorcjc.sga_mobile.ui.CourseActivity;
 
 import java.util.ArrayList;
 
@@ -35,6 +38,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.MessageVie
         holder.setName(course.getName());
         holder.setTeacher(course.getTeacher());
         holder.setDetails(course.getCredits(), course.getType());
+        holder.setCourseClickEvent(course.getId(), course.getName());
     }
 
     @Override
@@ -50,29 +54,51 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.MessageVie
         notifyDataSetChanged();
     }
 
-    public class MessageViewHolder extends RecyclerView.ViewHolder {
+    class MessageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private Context context;
         private TextView tvName;
         private TextView tvTeacher;
         private TextView tvDetails;
+        private View itemCourse;
 
-        public MessageViewHolder(View itemView) {
+        private String courseName;
+
+        MessageViewHolder(View itemView) {
             super(itemView);
 
+            setContext(itemView.getContext());
             tvName = (TextView) itemView.findViewById(R.id.tvName);
             tvTeacher = (TextView) itemView.findViewById(R.id.tvTeacher);
             tvDetails = (TextView) itemView.findViewById(R.id.tvDetails);
+            itemCourse = itemView.findViewById(R.id.itemCourse);
         }
 
-        public void setName(String name) {
+        private void setContext(Context context) {
+            this.context = context;
+        }
+
+        private void setName(String name) {
             tvName.setText(name);
         }
 
-        public void setTeacher(String teacher) {
+        private void setTeacher(String teacher) {
             tvTeacher.setText(teacher);
         }
 
-        public void setDetails(int credits, String type) {
+        private void setDetails(int credits, String type) {
             tvDetails.setText(credits + " créditos - " + type);
+        }
+
+        private void setCourseClickEvent(int courseId, String courseName) {
+            this.courseName = courseName;
+            itemCourse.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(context, CourseActivity.class);
+            intent.putExtra("courseName", courseName);
+            context.startActivity(intent);
         }
 
 //        public void setImage(String urlImage) {

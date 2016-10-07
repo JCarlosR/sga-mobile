@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/itemCourse"
     app:cardCornerRadius="2dp"
     app:cardElevation="2dp">
 
@@ -15,17 +16,15 @@
 
         <ImageView
             android:id="@+id/ivPhoto"
-            android:layout_width="62dp"
-            android:layout_height="62dp"
-            android:layout_gravity="left"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_book_black_24dp" />
+            android:src="@drawable/ic_book_course" />
 
         <LinearLayout
-            android:id="@+id/contact_info"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_weight="1"
@@ -57,7 +56,6 @@
                 android:text="4 créditos - Obligatorio"
                 android:textStyle="italic" />
         </LinearLayout>
-
 
     </LinearLayout>
 
