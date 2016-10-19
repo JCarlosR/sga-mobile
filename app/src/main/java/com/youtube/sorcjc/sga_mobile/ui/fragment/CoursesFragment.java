@@ -9,12 +9,21 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.youtube.sorcjc.sga_mobile.R;
 import com.youtube.sorcjc.sga_mobile.domain.Course;
+import com.youtube.sorcjc.sga_mobile.domain.CourseNote;
+import com.youtube.sorcjc.sga_mobile.domain.CycleNote;
+import com.youtube.sorcjc.sga_mobile.io.SgaApiAdapter;
+import com.youtube.sorcjc.sga_mobile.io.response.NotesResponse;
 import com.youtube.sorcjc.sga_mobile.ui.adapter.CourseAdapter;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,7 +31,7 @@ import java.util.ArrayList;
  * {@link CoursesFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class CoursesFragment extends Fragment {
+public class CoursesFragment extends Fragment implements Callback<NotesResponse> {
 
     private OnFragmentInteractionListener mListener;
 
@@ -60,16 +69,24 @@ public class CoursesFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // loadFakeCourses();
         loadCourses();
     }
 
-    private void loadCourses() {
+    private void loadFakeCourses() {
         ArrayList<Course> courses = new ArrayList<>();
         courses.add(new Course("Elab. proy tesis", "Juan Santos", 5, "Obligatorio"));
         courses.add(new Course("Cálculo II", "Guibar Obeso", 4, "Obligatorio"));
         courses.add(new Course("TAIS II", "Edwin Cieza", 4, "Obligatorio"));
         courses.add(new Course("Ingeniería web", "Ricardo Mendoza", 4, "Electivo"));
         coursesAdapter.setAll(courses);
+    }
+
+    // TODO: Test in Juarez's Laptop
+    private void loadCourses() {
+        // Hardcoded enrollment => This code has to be replaced
+        Call<NotesResponse> call = SgaApiAdapter.getApiService().getNotesResponse("523300310");
+        call.enqueue(this);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -94,6 +111,32 @@ public class CoursesFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onResponse(Call<NotesResponse> call, Response<NotesResponse> response) {
+        // What we have
+        ArrayList<CycleNote> cycleNotes = response.body().getNotes();
+        CycleNote firstCycle = cycleNotes.get(0);
+        ArrayList<CourseNote> courseNotes = firstCycle.getCourses();
+
+        // What we need
+        ArrayList<Course> courses = new ArrayList<>();
+
+        // How we adapt
+        for (CourseNote courseNote : courseNotes) {
+            final int average = Integer.parseInt(courseNote.getAverage());
+            Course course = new Course(courseNote.getName(), "Juan Santos", average, "Obligatorio");
+            courses.add(course);
+        }
+
+        // Finally
+        coursesAdapter.setAll(courses);
+    }
+
+    @Override
+    public void onFailure(Call<NotesResponse> call, Throwable t) {
+        Toast.makeText(getActivity(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
     }
 
     /**
