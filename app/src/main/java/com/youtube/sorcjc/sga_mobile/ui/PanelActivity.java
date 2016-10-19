@@ -1,9 +1,17 @@
 package com.youtube.sorcjc.sga_mobile.ui;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -96,7 +104,40 @@ public class PanelActivity extends AppCompatActivity
             fragment = new NotificationsFragment();
 
         } else if (id == R.id.nav_share) {
-            Toast.makeText(this, "En desarrollo ...", Toast.LENGTH_SHORT).show();
+            NotificationCompat.Builder mBuilder =
+                    new NotificationCompat.Builder(this)
+                            .setSmallIcon(R.drawable.ic_explore_white_48dp)
+                            .setContentTitle("Universidad Nacional de Trujillo")
+                            .setContentText("Se han publicado nuevas notas.");
+            // Set sound
+            Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            mBuilder.setSound(alarmSound);
+
+            // Creates an explicit intent for an Activity in your app
+            Intent resultIntent = new Intent(this, CourseActivity.class);
+            final String courseName = "Cálculo II";
+            resultIntent.putExtra("courseName", courseName);
+
+            // The stack builder object will contain an artificial back stack for the
+            // started Activity.
+            // This ensures that navigating backward from the Activity leads out of
+            // your application to the Home screen.
+            TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+            // Adds the back stack for the Intent (but not the Intent itself)
+            stackBuilder.addParentStack(PanelActivity.class);
+            // Adds the Intent that starts the Activity to the top of the stack
+            stackBuilder.addNextIntent(resultIntent);
+            PendingIntent resultPendingIntent =
+                    stackBuilder.getPendingIntent(
+                            0,
+                            PendingIntent.FLAG_UPDATE_CURRENT
+                    );
+            mBuilder.setContentIntent(resultPendingIntent);
+            NotificationManager mNotificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            // mId allows you to update the notification later on.
+            final int mId = 0;
+            mNotificationManager.notify(mId, mBuilder.build());
 
         } else if (id == R.id.nav_report) {
             Toast.makeText(this, "En desarrollo ...", Toast.LENGTH_SHORT).show();

@@ -23,7 +23,6 @@ public class CourseActivity extends AppCompatActivity {
 
         final TextView tvName = (TextView) findViewById(R.id.tvName);
         tvName.setText(courseName);
-
     }
 
     @Override
