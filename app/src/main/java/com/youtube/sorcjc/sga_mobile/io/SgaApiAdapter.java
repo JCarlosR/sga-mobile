@@ -22,7 +22,7 @@ public class SgaApiAdapter {
         // httpClient.interceptors().add(logging);
 
         // Define the base url by country
-        String baseUrl = "http://localhost:50";
+        String baseUrl = "http://192.168.173.1:50";
 
         if (API_SERVICE == null) {
             Retrofit retrofit = new Retrofit.Builder()

@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.youtube.sorcjc.sga_mobile.R;
+import com.youtube.sorcjc.sga_mobile.domain.User;
+import com.youtube.sorcjc.sga_mobile.ui.Global;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,15 +53,16 @@ public class DataFragment extends Fragment {
         etCellphone = (EditText) view.findViewById(R.id.etCellphone);
         etEmail = (EditText) view.findViewById(R.id.etEmail);
 
+        User usuario = Global.getFromSharedPreferences(getActivity(),"user_login");
         // Set default values
-        etUsername.setText("1043300212");
-        etLastName.setText("Ramos Suyón");
-        etFirstName.setText("Juan Carlos");
-        etDocument.setText("76474871");
-        etAddress.setText("Los Rosales #136");
-        etPhone.setText("");
-        etCellphone.setText("966 543 777");
-        etEmail.setText("juancagb.17@gmail.com");
+        etUsername.setText(usuario.getLogin());
+        etLastName.setText(usuario.getPer_paterno()+" "+usuario.getPer_materno());
+        etFirstName.setText(usuario.getPer_nombres());
+        etDocument.setText(usuario.getPer_dni());
+        etAddress.setText("");
+        etPhone.setText(usuario.getPer_celular());
+        etCellphone.setText(usuario.getPer_celular());
+        etEmail.setText(usuario.getPer_email());
 
         return view;
     }

@@ -1,6 +1,8 @@
 package com.youtube.sorcjc.sga_mobile.domain;
 
-public class Course {
+import java.io.Serializable;
+
+public class Course implements Serializable {
 
     private int id;
     private String name;

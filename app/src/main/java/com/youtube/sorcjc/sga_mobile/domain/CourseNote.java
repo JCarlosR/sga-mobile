@@ -2,10 +2,15 @@ package com.youtube.sorcjc.sga_mobile.domain;
 
 import com.google.gson.annotations.SerializedName;
 
-public class CourseNote {
+import java.io.Serializable;
+
+public class CourseNote implements Serializable {
 
     @SerializedName("nombre")
     private String name;
+
+    @SerializedName("docente")
+    private String docente;
 
     @SerializedName("nota1")
     private String note1;
@@ -19,6 +24,12 @@ public class CourseNote {
 
     @SerializedName("matricula")
     private String enrollment;
+
+    @SerializedName("tipo")
+    private String tipo;
+
+    @SerializedName("creditos")
+    private int creditos;
 
     public String getName() {
         return name;
@@ -66,5 +77,29 @@ public class CourseNote {
 
     public void setEnrollment(String enrollment) {
         this.enrollment = enrollment;
+    }
+
+    public String getDocente() {
+        return docente;
+    }
+
+    public void setDocente(String docente) {
+        this.docente = docente;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public int getCreditos() {
+        return creditos;
+    }
+
+    public void setCreditos(int creditos) {
+        this.creditos = creditos;
     }
 }

@@ -14,6 +14,7 @@
     <!-- PanelActivity -->
     <string name="management_system">Sistema de Gestión Académica UNT</string>
     <string name="action_settings">Configuración</string>
+    <string name="logout">Cerrar Sesión</string>
 
     <!-- DataFragment -->
     <string name="data_fragment_title">Datos de alumno</string>
@@ -34,5 +35,11 @@
 
     <!-- NotificationsFragment -->
     <string name="notifications_fragment_title">Últimas notificaciones</string>
+
+    <!-- CourseActivity -->
+    <string name="note_1">Unidad 1</string>
+    <string name="note_2">Unidad 2</string>
+    <string name="note_3">Unidad 3</string>
+    <string name="average">Promedio Final</string>
 
 </resources>
