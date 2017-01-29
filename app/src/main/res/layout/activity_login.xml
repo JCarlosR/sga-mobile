@@ -29,12 +29,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/username"
+        android:id="@+id/codigo"
         android:inputType="number" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/password"
+        android:id="@+id/clave"
         android:imeOptions="actionSend"
         android:inputType="textPassword" />
 

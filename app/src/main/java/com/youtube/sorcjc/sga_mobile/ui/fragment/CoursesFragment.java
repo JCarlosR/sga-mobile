@@ -15,8 +15,10 @@ import com.youtube.sorcjc.sga_mobile.R;
 import com.youtube.sorcjc.sga_mobile.domain.Course;
 import com.youtube.sorcjc.sga_mobile.domain.CourseNote;
 import com.youtube.sorcjc.sga_mobile.domain.CycleNote;
+import com.youtube.sorcjc.sga_mobile.domain.User;
 import com.youtube.sorcjc.sga_mobile.io.SgaApiAdapter;
 import com.youtube.sorcjc.sga_mobile.io.response.NotesResponse;
+import com.youtube.sorcjc.sga_mobile.ui.Global;
 import com.youtube.sorcjc.sga_mobile.ui.adapter.CourseAdapter;
 
 import java.util.ArrayList;
@@ -79,13 +81,14 @@ public class CoursesFragment extends Fragment implements Callback<NotesResponse>
         courses.add(new Course("Cálculo II", "Guibar Obeso", 4, "Obligatorio"));
         courses.add(new Course("TAIS II", "Edwin Cieza", 4, "Obligatorio"));
         courses.add(new Course("Ingeniería web", "Ricardo Mendoza", 4, "Electivo"));
-        coursesAdapter.setAll(courses);
+        //coursesAdapter.setAll(courses);
     }
 
     // TODO: Test in Juarez's Laptop
     private void loadCourses() {
         // Hardcoded enrollment => This code has to be replaced
-        Call<NotesResponse> call = SgaApiAdapter.getApiService().getNotesResponse("523300310");
+        User usuario = Global.getFromSharedPreferences(getActivity(),"user_login");
+        Call<NotesResponse> call = SgaApiAdapter.getApiService().getNotesResponse(usuario.getLogin());
         call.enqueue(this);
     }
 
@@ -117,6 +120,8 @@ public class CoursesFragment extends Fragment implements Callback<NotesResponse>
     public void onResponse(Call<NotesResponse> call, Response<NotesResponse> response) {
         // What we have
         ArrayList<CycleNote> cycleNotes = response.body().getNotes();
+
+        //aca solo toma el primero, pero debe tomar todos en caso sea varios ciclos
         CycleNote firstCycle = cycleNotes.get(0);
         ArrayList<CourseNote> courseNotes = firstCycle.getCourses();
 
@@ -125,13 +130,12 @@ public class CoursesFragment extends Fragment implements Callback<NotesResponse>
 
         // How we adapt
         for (CourseNote courseNote : courseNotes) {
-            final int average = Integer.parseInt(courseNote.getAverage());
-            Course course = new Course(courseNote.getName(), "Juan Santos", average, "Obligatorio");
+            Course course = new Course(courseNote.getName(), courseNote.getDocente(), courseNote.getCreditos(), courseNote.getTipo());
             courses.add(course);
         }
 
         // Finally
-        coursesAdapter.setAll(courses);
+        coursesAdapter.setAll(courses,courseNotes);
     }
 
     @Override

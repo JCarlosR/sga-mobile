@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.youtube.sorcjc.sga_mobile.R;
+import com.youtube.sorcjc.sga_mobile.domain.Course;
+import com.youtube.sorcjc.sga_mobile.domain.CourseNote;
 
 public class CourseActivity extends AppCompatActivity {
 
@@ -19,10 +21,18 @@ public class CourseActivity extends AppCompatActivity {
         if (actionBar != null)
             actionBar.setDisplayHomeAsUpEnabled(true);
 
-        String courseName = getIntent().getExtras().getString("courseName");
+        CourseNote course = (CourseNote) getIntent().getExtras().getSerializable("NOTECOURSE");
 
         final TextView tvName = (TextView) findViewById(R.id.tvName);
-        tvName.setText(courseName);
+        final TextView tvNota1 = (TextView) findViewById(R.id.Nota1);
+        final TextView tvNota2 = (TextView) findViewById(R.id.Nota2);
+        final TextView tvNota3 = (TextView) findViewById(R.id.Nota3);
+        final TextView tvPromedio = (TextView) findViewById(R.id.PromedioFinal);
+        tvName.setText(course.getName());
+        tvNota1.setText(course.getNote1());
+        tvNota2.setText(course.getNote2());
+        tvNota3.setText(course.getNote3());
+        tvPromedio.setText(course.getAverage());
     }
 
     @Override

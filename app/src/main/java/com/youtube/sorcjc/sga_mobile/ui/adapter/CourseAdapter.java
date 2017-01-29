@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.youtube.sorcjc.sga_mobile.R;
 import com.youtube.sorcjc.sga_mobile.domain.Course;
+import com.youtube.sorcjc.sga_mobile.domain.CourseNote;
 import com.youtube.sorcjc.sga_mobile.ui.CourseActivity;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.MessageViewHolder> {
 
     private ArrayList<Course> courses;
+    private ArrayList<CourseNote> coursesNotes;
     private Context context;
 
     public CourseAdapter(Context context) {
@@ -34,11 +36,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.MessageVie
     @Override
     public void onBindViewHolder(MessageViewHolder holder, int position) {
         Course course = courses.get(position);
+        CourseNote courseNote = coursesNotes.get(position);
 
         holder.setName(course.getName());
         holder.setTeacher(course.getTeacher());
         holder.setDetails(course.getCredits(), course.getType());
-        holder.setCourseClickEvent(course.getId(), course.getName());
+        holder.setCourseClickEvent(courseNote);
     }
 
     @Override
@@ -46,11 +49,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.MessageVie
         return courses.size();
     }
 
-    public void setAll(ArrayList<Course> courses) {
+    public void setAll(ArrayList<Course> courses, ArrayList<CourseNote> coursesNotes) {
         if (courses == null)
             throw new NullPointerException("The results cannot be null.");
 
         this.courses = courses;
+        this.coursesNotes = coursesNotes;
         notifyDataSetChanged();
     }
 
@@ -61,7 +65,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.MessageVie
         private TextView tvDetails;
         private View itemCourse;
 
-        private String courseName;
+        private CourseNote courseItem;
 
         MessageViewHolder(View itemView) {
             super(itemView);
@@ -86,18 +90,18 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.MessageVie
         }
 
         private void setDetails(int credits, String type) {
-            tvDetails.setText(credits + " créditos - " + type);
+            tvDetails.setText(credits+ " créditos - " + type);
         }
 
-        private void setCourseClickEvent(int courseId, String courseName) {
-            this.courseName = courseName;
+        private void setCourseClickEvent(CourseNote course) {
+            this.courseItem = course;
             itemCourse.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(context, CourseActivity.class);
-            intent.putExtra("courseName", courseName);
+            intent.putExtra("NOTECOURSE", courseItem);
             context.startActivity(intent);
         }
 

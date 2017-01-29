@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "97357701082",
+    "firebase_url": "https://sgamobile-40559.firebaseio.com",
+    "project_id": "sgamobile-40559",
+    "storage_bucket": "sgamobile-40559.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97357701082:android:9e42a2e839381ee2",
+        "android_client_info": {
+          "package_name": "com.youtube.sorcjc.sga_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "97357701082-t8onoe3hr0923eo024nordvr8km8jcia.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTZFELG2RjrlvjyL8sf87Qrw7eknDa4Tk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

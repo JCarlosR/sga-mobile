@@ -1,8 +1,10 @@
 package com.youtube.sorcjc.sga_mobile.ui;
 
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -15,6 +17,7 @@ import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -76,10 +79,31 @@ public class PanelActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            cerrarSesion();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void cerrarSesion(){
+        final Activity activity = this;
+        AlertDialog.Builder adb = new AlertDialog.Builder(this);
+        adb.setTitle("Confirmar para salir");
+        adb.setMessage("¿Esta seguro que desea cerrar sesión?");
+
+        adb.setPositiveButton("Cerrar sesión",new DialogInterface.OnClickListener(){
+            public void onClick(DialogInterface dialog,int which)
+            {
+                Global.clearSharedPreferences(activity);
+
+                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+        adb.setNegativeButton("Cancelar",null);
+        adb.show();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -153,4 +177,6 @@ public class PanelActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }
