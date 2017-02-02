@@ -40,9 +40,6 @@ public class PanelActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();*/
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -163,8 +160,13 @@ public class PanelActivity extends AppCompatActivity
             final int mId = 0;
             mNotificationManager.notify(mId, mBuilder.build());
 
-        } else if (id == R.id.nav_report) {
+        } else if (id == R.id.nav_help) {
             Toast.makeText(this, "En desarrollo ...", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_report_pie) {
+
+        } else if (id == R.id.nav_report_bar) {
+
+        } else if (id == R.id.nav_report_line) {
 
         }
 

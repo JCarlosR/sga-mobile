@@ -14,7 +14,7 @@
     <!-- PanelActivity -->
     <string name="management_system">Sistema de Gestión Académica UNT</string>
     <string name="action_settings">Configuración</string>
-    <string name="logout">Cerrar Sesión</string>
+    <string name="logout">Cerrar sesión</string>
 
     <!-- DataFragment -->
     <string name="data_fragment_title">Datos de alumno</string>
@@ -41,5 +41,8 @@
     <string name="note_2">Unidad 2</string>
     <string name="note_3">Unidad 3</string>
     <string name="average">Promedio Final</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -18,7 +18,33 @@
             android:id="@+id/nav_notifications"
             android:icon="@drawable/ic_announcement_black_24dp"
             android:title="Anuncios" />
+
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@drawable/ic_action_online_help"
+            android:title="Ayuda en línea" />
     </group>
+
+    <item android:title="Reportes">
+        <menu>
+
+            <item
+                android:id="@+id/nav_report_pie"
+                android:icon="@drawable/ic_action_bar_chart"
+                android:title="Reporte PIE" />
+
+            <item
+                android:id="@+id/nav_report_bar"
+                android:icon="@drawable/ic_action_bar_chart"
+                android:title="Reporte BAR" />
+
+            <item
+                android:id="@+id/nav_report_line"
+                android:icon="@drawable/ic_action_bar_chart"
+                android:title="Reporte LINE" />
+
+        </menu>
+    </item>
 
     <item android:title="Más opciones">
         <menu>
@@ -26,10 +52,7 @@
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
                 android:title="Compartir" />
-            <item
-                android:id="@+id/nav_report"
-                android:icon="@drawable/ic_bug_report_black_24dp"
-                android:title="Reportar error" />
+
         </menu>
     </item>
 
