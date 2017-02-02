@@ -59,7 +59,7 @@ public class DataFragment extends Fragment {
         etLastName.setText(usuario.getPer_paterno()+" "+usuario.getPer_materno());
         etFirstName.setText(usuario.getPer_nombres());
         etDocument.setText(usuario.getPer_dni());
-        etAddress.setText("");
+        etAddress.setText("AV. PERU 213");
         etPhone.setText(usuario.getPer_celular());
         etCellphone.setText(usuario.getPer_celular());
         etEmail.setText(usuario.getPer_email());

@@ -18,11 +18,20 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.youtube.sorcjc.sga_mobile.R;
+import com.youtube.sorcjc.sga_mobile.domain.AsistenciaCurso;
+import com.youtube.sorcjc.sga_mobile.domain.User;
+import com.youtube.sorcjc.sga_mobile.io.SgaApiAdapter;
+import com.youtube.sorcjc.sga_mobile.io.response.AsistenciasResponse;
+import com.youtube.sorcjc.sga_mobile.ui.Global;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BarFragment extends Fragment implements Callback<IncidentsCountByProject> {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class BarFragment extends Fragment implements Callback<AsistenciasResponse> {
 
     private BarChart barChart;
 
@@ -44,39 +53,39 @@ public class BarFragment extends Fragment implements Callback<IncidentsCountByPr
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        Call<IncidentsCountByProject> call = IncidentApiAdapter.getApiService().getIncidentsCountByProject();
+        User usuario = Global.getFromSharedPreferences(getActivity(),"user_login");
+        Call<AsistenciasResponse> call = SgaApiAdapter.getApiService().getAsistenciasResponse(usuario.getLogin());
         call.enqueue(this);
     }
 
     @Override
-    public void onResponse(Call<IncidentsCountByProject> call, Response<IncidentsCountByProject> response) {
+    public void onResponse(Call<AsistenciasResponse> call, Response<AsistenciasResponse> response) {
         if (response.isSuccessful()) {
-            IncidentsCountByProject incidentsCountByProject = response.body();
-            createBarChart(incidentsCountByProject);
+            AsistenciasResponse asistenciasResponse = response.body();
+            createBarChart(asistenciasResponse);
         } else {
             Toast.makeText(getContext(), "Error al obtener la data", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
-    public void onFailure(Call<IncidentsCountByProject> call, Throwable t) {
+    public void onFailure(Call<AsistenciasResponse> call, Throwable t) {
         Toast.makeText(getContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
     }
 
-    private void createBarChart(IncidentsCountByProject incidentsCountByProject) {
+    private void createBarChart(AsistenciasResponse asistenciasResponse) {
         List<BarEntry> entries = new ArrayList<>();
 
-        ArrayList<IncidentsByProject> incidentsByProjectArray = incidentsCountByProject.getIncidentsByProject();
+        ArrayList<AsistenciaCurso> incidentsByProjectArray = asistenciasResponse.getCursosAsistencias();
         int i = 0;
         String[] labels = new String[incidentsByProjectArray.size()];
-        for (IncidentsByProject incidentsByProject: incidentsByProjectArray) {
-            entries.add(new BarEntry(i, incidentsByProject.getCount(), incidentsByProject.getName()));
-            labels[i] = incidentsByProject.getName();
+        for (AsistenciaCurso incidentsByProject: incidentsByProjectArray) {
+            entries.add(new BarEntry(i, incidentsByProject.getAsistencias(), incidentsByProject.getNombre()));
+            labels[i] = incidentsByProject.getNombre().substring(0,3);
             ++i;
         }
 
-        BarDataSet set = new BarDataSet(entries, "Proyectos con más incidencias");
+        BarDataSet set = new BarDataSet(entries, "Asistencias por Curso");
 
         BarData data = new BarData(set);
         data.setBarWidth(0.9f); // set custom bar width
@@ -85,7 +94,7 @@ public class BarFragment extends Fragment implements Callback<IncidentsCountByPr
 
         Description description = new Description();
         description.setTextColor(ColorTemplate.VORDIPLOM_COLORS[2]);
-        description.setText("Cantidad de incidencias");
+        description.setText("Cantidad de asistencias");
         barChart.setDescription(description);
 
 

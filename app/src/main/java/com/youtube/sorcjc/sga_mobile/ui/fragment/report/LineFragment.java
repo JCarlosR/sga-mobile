@@ -20,8 +20,8 @@ import com.youtube.sorcjc.sga_mobile.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LineFragment extends Fragment implements Callback<IncidentsCountBySupport> {
-
+public class LineFragment extends Fragment {
+/*
     private LineChart lineChart;
 
     public LineFragment() {
@@ -85,4 +85,5 @@ public class LineFragment extends Fragment implements Callback<IncidentsCountByS
         lineChart.setData(data);
         lineChart.invalidate(); // refresh
     }
+    */
 }

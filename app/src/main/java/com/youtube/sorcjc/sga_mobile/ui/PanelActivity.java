@@ -29,6 +29,8 @@ import com.youtube.sorcjc.sga_mobile.ui.fragment.CoursesFragment;
 import com.youtube.sorcjc.sga_mobile.ui.fragment.DataFragment;
 import com.youtube.sorcjc.sga_mobile.ui.fragment.NotificationsFragment;
 import com.youtube.sorcjc.sga_mobile.ui.fragment.SyllabusFragment;
+import com.youtube.sorcjc.sga_mobile.ui.fragment.report.BarFragment;
+import com.youtube.sorcjc.sga_mobile.ui.fragment.report.PieFragment;
 
 public class PanelActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -163,9 +165,9 @@ public class PanelActivity extends AppCompatActivity
         } else if (id == R.id.nav_help) {
             Toast.makeText(this, "En desarrollo ...", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_report_pie) {
-
+            fragment = new PieFragment();
         } else if (id == R.id.nav_report_bar) {
-
+            fragment = new BarFragment();
         } else if (id == R.id.nav_report_line) {
 
         }
