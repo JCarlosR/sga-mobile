@@ -25,6 +25,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.youtube.sorcjc.sga_mobile.R;
+import com.youtube.sorcjc.sga_mobile.ui.activity.ChatActivity;
 import com.youtube.sorcjc.sga_mobile.ui.fragment.CoursesFragment;
 import com.youtube.sorcjc.sga_mobile.ui.fragment.DataFragment;
 import com.youtube.sorcjc.sga_mobile.ui.fragment.NotificationsFragment;
@@ -163,7 +164,8 @@ public class PanelActivity extends AppCompatActivity
             mNotificationManager.notify(mId, mBuilder.build());
 
         } else if (id == R.id.nav_help) {
-            Toast.makeText(this, "En desarrollo ...", Toast.LENGTH_SHORT).show();
+            final Intent intent = new Intent(this, ChatActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_report_pie) {
             fragment = new PieFragment();
         } else if (id == R.id.nav_report_bar) {
