@@ -7,10 +7,6 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.youtube.sorcjc.sga_mobile.domain.User;
 
-/**
- * Created by Juarez on 08/01/2017.
- */
-
 public class Global {
     public static void saveInSharedPreferences(Activity activity, String key, User usuario) {
         SharedPreferences sharedPref = activity.getSharedPreferences("global_preferences", Context.MODE_PRIVATE);
