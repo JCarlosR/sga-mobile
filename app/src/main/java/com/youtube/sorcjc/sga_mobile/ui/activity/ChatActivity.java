@@ -16,6 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.youtube.sorcjc.sga_mobile.R;
 import com.youtube.sorcjc.sga_mobile.domain.Message;
+import com.youtube.sorcjc.sga_mobile.domain.User;
 import com.youtube.sorcjc.sga_mobile.ui.Global;
 import com.youtube.sorcjc.sga_mobile.ui.adapter.MessageAdapter;
 
@@ -29,6 +30,8 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
     private MessageAdapter messageAdapter;
 
+    private User usuario;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,13 +40,15 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         database = FirebaseDatabase.getInstance();
         setupRecyclerView();
 
+        usuario = Global.getFromSharedPreferences(this,"user_login");
+
         getChatMessages();
     }
 
     private void getChatMessages() {
         database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("messages");
-        myRef.addValueEventListener(this);
+        myRef.limitToLast(8).addValueEventListener(this);
     }
 
     private void setupRecyclerView() {
@@ -70,7 +75,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 if (description.isEmpty())
                     return;
 
-                final String name = "Juan";
+                final String name = usuario.getPer_nombres();
                 // final String name = Global.getFromSharedPreferences(this, "name");
                 // if (name.isEmpty())
                 //     return;
